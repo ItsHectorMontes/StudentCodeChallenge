@@ -30,7 +30,7 @@ namespace WebApi.Controllers
         /// <param name="name"></param>
         /// <returns>return a student .</returns>
         [HttpGet("{name}")]
-        public async Task<ActionResult<StudentModel>> GetStudentsByNameC(string name)
+        public async Task<ActionResult<List<StudentModel>>> GetStudentsByNameC(string name)
         {
             return await Mediator.Send(new StudentSearch.Ejecuta { Name = name });
         }

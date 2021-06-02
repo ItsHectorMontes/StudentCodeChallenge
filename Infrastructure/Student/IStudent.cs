@@ -13,6 +13,6 @@ namespace Infrastructure.SpStudent
     public interface IStudent
     {
         Task<IEnumerable<StudentModel>> GetStudentsAsync();
-        Task<StudentModel> GetStudentsAsyncByParameters(string parameters);
+        Task<IEnumerable<StudentModel>> GetStudentsAsyncByParameters(string parameters);
     }
 }

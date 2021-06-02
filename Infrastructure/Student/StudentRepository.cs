@@ -50,21 +50,20 @@ namespace Infrastructure.SpStudent
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public async Task<StudentModel> GetStudentsAsyncByParameters(string name)
+        public async Task<IEnumerable<StudentModel>> GetStudentsAsyncByParameters(string name)
         {
-            var storeProcedure = "SP_Get_Students_By_Parameters";
-            StudentModel student = null;
+            IEnumerable<StudentModel> studentList = null;
+            var storeProcedure = "SP_Get_Students_By_Parameters";            
             try
             {
                 var connection = _factoryConnection.GetConnection();
-                student = await connection.QueryFirstAsync<StudentModel>(storeProcedure, new
+                studentList = await connection.QueryAsync<StudentModel>(storeProcedure, new
                 {
                     parameter = name
                 },
-                commandType: CommandType.StoredProcedure
-                );
+                commandType: CommandType.StoredProcedure);
                 _factoryConnection.CloseConnection();
-                return student;
+                return studentList;
             }
             catch (Exception e)
             {
